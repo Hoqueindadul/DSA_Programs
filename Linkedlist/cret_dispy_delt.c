@@ -5,12 +5,7 @@
 
 struct node *head=NULL, *temp, *newnode;
 
-void creat();
-void display();
-void asfirst();
-void aslast();
-void asfirst_delt();
-void aslast_delt();
+
 struct node
 {
 	int data;
@@ -20,7 +15,7 @@ struct node
 void main()
 {
 	int ch1, ch2;
-	clrscr();
+	
 	while(1)
 	{
 		if(head == NULL)
@@ -98,7 +93,7 @@ void creat()
 void display()
 {
 	temp = head;
-	if(temp->data == NULL)
+	if(head == NULL)
 	{
 		printf("LinkedList is Empty\n");
 	}
@@ -121,24 +116,13 @@ void display()
 }
 void asfirst()
 {
-	int more1;
-	do{
+	temp = head;
 	newnode = (struct node *)malloc(sizeof(struct node));
-	printf("Enter your number: \n");
+	printf("Enter your data: \n");
 	scanf("%d", &newnode->data);
-	if(head == NULL)
-	{
-		newnode->next = head;
-		head = newnode;
-	}
-	else
-	{
-		newnode->next = head;
-		head = newnode;
-	}
-	printf("Do you insert more node? Press(1/0):\n");
-	scanf("%d",&more1);
-	}while(more1==1);
+	newnode->next = head;
+	head = newnode;
+	
 }
 void aslast()
 {
@@ -146,14 +130,16 @@ void aslast()
 	newnode = (struct node *)malloc(sizeof(struct node));
 	printf("Enter your data: \n");
 	scanf("%d", &newnode->data);
-   //	newnode->next = NULL;
-	while(temp->next != NULL)
+    //newnode->next = NULL;
+	while(temp!= NULL)
 	{
+		if(temp->next == NULL)
+		{
+			temp->next = newnode;
+			newnode->next = NULL;
+		}
 		temp = temp->next;
 	}
-	temp->next = newnode;
-	newnode->next = NULL;
-
 }
 void asfirst_delt()
 {
