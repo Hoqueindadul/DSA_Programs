@@ -8,6 +8,9 @@ void display();
 void insert_asfirst();
 void insert_aslast();
 void insert_anywhere();
+void delet_asfirst();
+void delet_aslast();
+void delet_anywhere();
 
 struct node *head=NULL, *temp, *newnode;
 
@@ -37,7 +40,7 @@ void main()
 		{
 			case 'c': creat();
 			break;
-			case 'i': printf("(f) First\t(l) Last\n");
+			case 'i': printf("(f) First\t(l) Last\t (a) AnyWhere\n");
 					scanf(" %c", &ch2);
 					switch(ch2)
 					{
@@ -47,25 +50,27 @@ void main()
 						break;
 						case 'a': insert_anywhere();
 						break;
-						default: printf("Your choice is wrong!\n");
+						default: if(ch2 == 'c')
+                                printf("Your choice is wrong!\n");
 					}
 			break;
-			// case 'r': printf("(8) First\t (9) Last\n");
-			// 		scanf("%d", &ch2);
-			// 		switch(ch2)
-			// 		{
-			// 			case 8: asfirst_delt();
-			// 			break;
-			// 			case 9: aslast_delt();
-			// 			break;
-			// 			// case 11: asandywhere();
-			// 			// break;
-			// 			default: if(ch2 == 1)
-			// 					 printf("your choice is wrong\n");
-			// 		}
+			case 'r': printf("(p) First\t (s) Last\n");
+			 		scanf(" %c", &ch2);
+			 		switch(ch2)
+			 		{
+			 			case 'p': delet_asfirst();
+			 			break;
+			 			case 's': delet_aslast();
+			 			break;
+			 			case 'j': delet_anywhere();
+						break;
+			 			default: printf("your choice is wrong\n");
+			 		}
 			case 'd': display();
 			break;
 			case 'e': exit(0);
+            default: if(ch1 == 'i','r','d')
+                    printf("Your choice is wrong.\n");
 		}
 	}
 }
@@ -192,6 +197,11 @@ void insert_anywhere()
                     newnode->next = temp->next;
                     temp->next = newnode;
                     found = 1;
+                    
+                }
+                else
+                {
+                    printf("Your entered nodedata is not present.");
                 }
                 temp = temp->next;
             }
@@ -213,7 +223,93 @@ void insert_anywhere()
                 temp->next = newnode;
                 break;
             }
+            else
+            {
+                printf("Your entered node data in not present.");
+            }
             temp = temp->next;
         }
+    }
+}
+
+void delet_asfirst()
+{
+    temp = head;
+    if(head == NULL)
+    {
+        printf("Linkedlist is empty.\n");
+    }
+    else
+    {
+        if(temp->next == NULL)
+        {
+            printf("%d is deleted.\n", temp->data);
+            // head = NULL;
+            free(temp);
+        }
+        else
+        {
+            printf("%d is deleted.\n", temp->data);
+            head = head->next;
+            free(temp);
+        }
+    }
+}
+void delet_aslast()
+{
+    temp = head;
+    if(head == NULL)
+    {
+        printf("Linkedlist is empty.\n");
+    }
+    else
+    {
+        if(temp->next == NULL)
+        {
+            printf("%d is deleted.", temp->data);
+            temp = NULL;
+            head = temp;
+        }
+        else
+        {
+            while(temp != NULL)
+            {
+                if(temp->next->next == NULL)
+                {
+                    printf("%d is deleted.\n", temp->next->data);
+                    free(temp->next);
+                    temp->next = NULL;
+                    break;
+                }
+                temp = temp->next;
+            }
+        }
+    }
+}
+
+void delet_anywhere()
+{
+    int nodedata, found = 0;
+    temp = head;
+    printf("Enter the node data whick want to delte: ");
+    scanf("%d", &nodedata);
+    if(head->data == nodedata)
+    {
+        printf("%d is deleted\n", head->data);
+        head = head->next;
+        free(temp);
+    }
+    else
+    {
+        while(found == 0 && temp != NULL)
+        {
+            if(temp->next->data == nodedata)
+            {
+                printf("%d id deleted.\n", temp->next->data);
+                temp->next = temp->next->next;
+                break;
+            }
+        }
+        temp = temp->next;
     }
 }

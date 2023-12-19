@@ -17,7 +17,7 @@ int main()
     creat_trvers(arr, size);
     printf("Enter your position:\n");
     scanf("%d", &pos);
-    printf("enter your element: \n");
+    printf("Enter your element: \n");
     scanf("%d", &elm);
     insert(arr, size, elm, pos);
     printf("For delete\n");
@@ -40,14 +40,15 @@ void creat_trvers(int ar[], int siz)
     {
         printf("%d ", ar[i]);
     }
+    printf("\n");
 }
 void insert(int ar[], int siz, int elmt, int posi)
 {
-    int ruf = siz, i;
-    while(ruf>=posi)
+    int temp = siz, i;
+    while(temp>=posi)
     {
-        ar[ruf+1] = ar[ruf];
-        ruf --;
+        ar[temp+1] = ar[temp];
+        temp --;
     }
     ar[posi] = elmt;
     siz += 1;

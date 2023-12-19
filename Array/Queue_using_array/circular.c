@@ -56,36 +56,6 @@ void insert_queue()
         }
     }
 }
-void display_queue()
-{
-    if(rear == -1)
-    {
-        printf("Queue is empty.\n");
-    }
-    else
-    {
-        if(rear>=front)
-        {
-            for(int i=front;i<=rear;i++)
-            {
-                printf("%d ", queue[i]);
-            }
-        }
-        else
-        {
-            for(int i=0;i<=rear;i++)
-            {
-                printf("%d ", queue[i]);
-            }
-            for(int i=front;i<=MAX-1;i++)
-            {
-                printf("%d ", queue[i]);
-            }
-        }
-        
-    }
-}
-
 void delet_queue()
 {
     if(rear == -1)
@@ -107,3 +77,37 @@ void delet_queue()
         }
     }
 }
+void display_queue()
+{
+    if(rear == -1)
+    {
+        printf("Queue is empty.\n");
+    }
+    else
+    {
+        if(rear >= front)
+        {
+            for(int i=front;i<=rear;i++)
+            {
+                printf("%d ", queue[i]);
+            }
+            printf("\n");
+        }
+        else
+        {
+            for(int i=0;i<=rear;i++)
+            {
+                printf("%d ", queue[i]);
+            }
+            
+            for(int i=front;i<MAX;i++)
+            {
+                printf("%d ", queue[i]);
+            }
+            
+            printf("\n");
+        }
+        
+    }
+}
+
